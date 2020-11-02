@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
-/**
- *
- * @author Benevaldo
- */
 public abstract class AVLTree {
 
     private Node root;
@@ -201,19 +192,90 @@ public abstract class AVLTree {
         t.setHeight(max(height(t.getLeft()), height(t.getRight())) + 1);
         return t;
     }
-
-    /**
-     * @return the displayNode
-     */
+    
+    public String searchNode(int numeroCidade){
+        return buscarNo(this.root, numeroCidade); 
+    }
+    
+    private String buscarNo(Node r, int numeroCidade){
+        String cidade = null;
+        try{
+            if(numeroCidade > r.numericKey){
+                buscarNo(r.right, numeroCidade);
+            } else if(numeroCidade < r.numericKey){
+                buscarNo(r.left, numeroCidade);
+            } else if(numeroCidade == r.numericKey){
+                cidade = cidade + r.stringKey; 
+            }
+        } catch(Exception e){
+            cidade = cidade + "Cidade não encontrada";
+        }
+        
+        return cidade;
+    }
+    
+    
+    private Node procuraMenor(Node atual){
+        Node no1 = atual;
+        Node no2 = atual.left;
+        while(no2 != null){
+            no1 = no2;
+            no2 = no2.left;
+        }
+        
+        return no1;
+    }
+        
+    private Boolean removeNode(Node r, int numeroNo){
+        if(r == null){
+            return false;
+        }
+        
+        boolean removido = false;
+        
+        if(numeroNo < r.numericKey){
+            removido = removeNode(r.left, numeroNo);
+        }
+        
+        if(numeroNo > r.numericKey){
+            removido = removeNode(r.right, numeroNo);
+        }
+        
+        if(numeroNo == r.numericKey){
+            if((r.left == null) && (r.right == null)){
+                r = null;
+            }else if((r.left == null) || (r.right == null)){
+                if(r.left != null){
+                    r.numericKey = r.left.numericKey;
+                    r.stringKey = r.left.stringKey;
+                    r.left = null;
+                } else {
+                    r.numericKey = r.right.numericKey;
+                    r.stringKey = r.right.stringKey;
+                    r.right = null;
+                }
+            } else{
+                Node temp = procuraMenor(r.right);
+                r.numericKey = temp.numericKey;
+                r.stringKey = temp.stringKey;
+                removeNode(r.right, r.numericKey);
+            }
+            removido = true;
+        }
+        
+        return removido;
+    }
+    
+    public Boolean remove(int numeroNo) {
+        return removeNode(this.root, numeroNo);
+    }
+    
     public String getDisplayNode() {
         return displayNode;
     }
-
-    /**
-     * @return the mensagem
-     */
+    
     public String getMensagem() {
         return mensagem;
     }
 
-}// fim classe AVLTree 
+}

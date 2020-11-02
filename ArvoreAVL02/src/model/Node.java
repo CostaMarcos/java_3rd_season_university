@@ -8,7 +8,7 @@ package model;
 public abstract class Node {
 
     protected Node left, right;
-    protected long numericKey;
+    protected int numericKey;
     protected String stringKey;
     protected int height;
 
@@ -58,7 +58,7 @@ public abstract class Node {
     /**
      * @param numericKey the integerKey to set
      */
-    public void setNumericKey(long numericKey) {
+    public void setNumericKey(int numericKey) {
         this.numericKey = numericKey;
     }
 

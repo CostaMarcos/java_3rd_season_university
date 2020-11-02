@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="ArvoreAVL02.jar" size="9833" download="eager" />
+    <jar href="ArvoreAVL02.jar" size="10245" download="eager" />
     <jar href="lib\commons-cli-1.4.jar" size="53820" download="eager" />
     <jar href="lib\commons-codec-1.13.jar" size="344339" download="eager" />
     <jar href="lib\gson-2.8.2.jar" size="232932" download="eager" />

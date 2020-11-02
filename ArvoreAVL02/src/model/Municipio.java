@@ -21,14 +21,14 @@ public class Municipio extends Node {
     /**
      * @return the id
      */
-    public long getId() {
-        return id;
+    public int getId() {
+        return (int) id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
         this.setNumericKey(id);
     }
